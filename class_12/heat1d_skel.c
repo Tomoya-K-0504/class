@@ -4,7 +4,7 @@
 #include<mpi.h>
 
 #define NX 2400
-#define NLOOP 100000
+#define NLOOP 10000000
 #define NINTERVAL 1000
 
 int main(int argc, char **argv) {
