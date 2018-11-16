@@ -8,6 +8,8 @@ import android.widget.Toast;
 import com.example.koiketomoya.dijkstra.BoardView;
 import com.example.koiketomoya.dijkstra.Solver;
 
+import java.io.FileOutputStream;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -21,5 +23,11 @@ public class MainActivity extends AppCompatActivity {
     }
     public void solve(View view) {
         ((BoardView)findViewById(R.id.boardView)).solve(this);
+    }
+    public void load(View view) {
+        ((BoardView)findViewById(R.id.boardView)).load(this);
+    }
+    public void save(View view) {
+        ((BoardView)findViewById(R.id.boardView)).save(this);
     }
 }

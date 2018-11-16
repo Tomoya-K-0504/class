@@ -1,6 +1,7 @@
 package com.example.koiketomoya.dijkstra;
 
 import android.graphics.PointF;
+import com.example.koiketomoya.dijkstra.MyPoint;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,32 +11,32 @@ import java.util.Scanner;
 
 
 public class Solver {
-    private ArrayList<PointF> points; /* 与えられた点の集合 */
-    private PointF goal;              /* ゴールの点 */
+    private ArrayList<MyPoint> points; /* 与えられた点の集合 */
+    private MyPoint goal;              /* ゴールの点 */
 
     public static final double OneHop = 1000.00001;
 
-    void setupBoard(ArrayList<PointF> sentPoints) {
+    void setupBoard(ArrayList<MyPoint> sentPoints) {
         points = sentPoints;
         goal = points.get(sentPoints.size()-1);
         System.out.println("Points: " + points);
         System.out.println("Goal: " + goal);
     }
 
-    public double calcDistance(PointF a, PointF b) {
+    public double calcDistance(MyPoint a, MyPoint b) {
     	return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
     }
 
     public double solve() {
         PriorityQueue<SearchNode> q = new PriorityQueue<>(new MyPointComp0()); /* 優先度キュー */
-        HashMap<PointF,Double> visited = new HashMap<>();  /* 探索済みの点の管理 */
-        PointF start = points.get(0);
+        HashMap<MyPoint,Double> visited = new HashMap<>();  /* 探索済みの点の管理 */
+        MyPoint start = points.get(0);
         SearchNode rootNode = new SearchNode(0.0,start);
         System.out.println("search from " + rootNode);
 
         // TODO
         // 初期化
-        for (PointF point : points) { visited.put(point, 1000000.0); }
+        for (MyPoint point : points) { visited.put(point, 1000000.0); }
         q.add(rootNode);
         visited.put(start, 0.0);
         SearchNode node = rootNode;
@@ -52,7 +53,7 @@ public class Solver {
         	if (node.point.equals(goal)) { return node.priority; }
 
         	// hereから各点までの距離を計算し、10以下ならばqueueに追加
-            for (PointF point : points) {
+            for (MyPoint point : points) {
             	// 自分の点と同じときはスキップ
             	if (node.point.equals(point)) { continue; }
 
